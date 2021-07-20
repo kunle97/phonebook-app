@@ -14,9 +14,7 @@ class UserController extends Controller
     public function getSignUpView(){
         return view('sign-up');
     }
-    public function getPhonebook(){
-        return view('phonebook');
-    }
+
 
     public function postSignIn(Request $request)
      {
@@ -26,7 +24,7 @@ class UserController extends Controller
          ]);
 
          if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
-             return redirect()->route('phonebook');
+             return redirect()->route('newsfeed');
          }
          return redirect()->back();
      }
