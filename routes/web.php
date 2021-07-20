@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+//View rouets
+Route::get('/', [UserController::class, 'getSignInView']);
+Route::get('/sign-up', [UserController::class, 'getSignUpView']);
+Route::get('/phonebook',[UserController::class, 'getPhonebook'])->name('phonebook');
+
+//User Authentication rountes
+
+Route::post('/signup',[UserController::class, 'postSignUp']);
+Route::post('/signin',[UserController::class, 'postSignIn']);
+
+Route::post('/create-contact',[
+  'uses' => 'ContactController@createContact',
+  'as' => 'contact.create',//Give the route a name
+  'middleware' => 'auth'
+]);
