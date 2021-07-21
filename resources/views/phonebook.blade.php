@@ -16,6 +16,7 @@
         <div class="row col-md-8 col-md-offset-2 custyle">
         <table class="table table-striped custab">
         <thead>
+        <a href="/logout" ><button href="#"  class="btn btn-primary  pull-left" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Logout</button></a>
         <button href="#" id="addContactButton" class="btn btn-primary  pull-right" data-bs-toggle="modal" data-bs-target="#staticBackdrop" ><b>+</b> Add Contact</button>
             <tr>
                 <th>First Name</th>
@@ -34,8 +35,8 @@
                     <td>{{$contact->email}}</td>
                     <td>{{$contact->address}}</td>
                     <td class="text-center">
-                      <a id="edit-contact-button" data-contact-id="{{$contact->id}}" data-first-name="{{$contact->first_name}}" data-last-name="{{$contact->last_name}}" data-phone="{{$contact->phone}}" data-email="{{$contact->email}}" data-address="{{$contact->address}}" class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a>
-                      <a id="delete-contact-button" href="/delete-contact/{{$contact->id}}" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+                      <a id="edit-contact-button" data-contact-id="{{$contact->id}}" data-first-name="{{$contact->first_name}}" data-last-name="{{$contact->last_name}}" data-phone="{{$contact->phone}}" data-email="{{$contact->email}}" data-address="{{$contact->address}}" class='btn btn-info btn-xs edit-contact-button' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                      <a id="delete-contact-button" href="/delete-contact/{{$contact->id}}" class="btn btn-danger btn-xs delete-contact-button"><span class="glyphicon glyphicon-remove"></span> Delete</a>
                     </td>
                 </tr>
                 @endforeach
@@ -158,7 +159,7 @@
         $("#addContactModal").modal('show');
       });
 
-      $("#edit-contact-button").click(function(){
+      $(".edit-contact-button").click(function(){
         $("#editContactModal").modal('show');
         $("#edit-contact-id").val($(this).attr("data-contact-id"));
         $("#edit-first-name").val($(this).attr("data-first-name"));
@@ -167,8 +168,8 @@
         $("#edit-email").val($(this).attr("data-email"));
         $("#edit-address").val($(this).attr("data-address"));
       });
-      
-      $("#delete-contact-button").click(function(e){
+
+      $(".delete-contact-button").click(function(e){
         e.preventDefault();
         $("#delete-contact-link").attr("href", $(this).attr('href'));
         $("#deleteContactModal").modal('show');

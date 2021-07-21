@@ -28,3 +28,6 @@ Route::post('/signin',[UserController::class, 'postSignIn']);
 Route::post('/create-contact',[ContactController::class,  'createContact']);
 Route::post('/edit-contact',[ContactController::class,  'updateContact']);
 Route::get('/delete-contact/{contact_id}',[ContactController::class, 'deleteContact']);
+
+
+Route::get('/logout',[UserController::class, 'getLogout']);

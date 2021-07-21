@@ -27,8 +27,12 @@ class ContactController extends Controller
 
     }
     public function getPhonebook(){
+      if(Auth::User()){
         $contacts = Contact::where('user_id', Auth::User()->id)->get();
         return view('phonebook',['contacts' => $contacts]);
+      }else{
+          return redirect()->route('home');
+      }
     }
     public function updateContact(Request $request){
       if(Auth::User()){
