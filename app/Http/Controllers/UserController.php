@@ -24,7 +24,7 @@ class UserController extends Controller
          ]);
 
          if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
-             return redirect()->route('newsfeed');
+             return redirect()->route('phonebook');
          }
          return redirect()->back();
      }

@@ -11,6 +11,8 @@ class ContactController extends Controller
         $contact = new Contact();
         if(Auth::User()){
           $contact->user_id = Auth::User()->id;
+        }else {
+            return redirect()->route('home');
         }
 
         $contact->first_name = $request['first_name'];
@@ -29,6 +31,22 @@ class ContactController extends Controller
         return view('phonebook',['contacts' => $contacts]);
     }
     public function updateContact(Request $request){
+      if(Auth::User()){
+          $contact = Contact::where('id',$request['edit-contact-id'])->first();
+
+          $contact->first_name = $request['first_name'];
+          $contact->last_name = $request['last_name'];
+          $contact->email = $request['email'];
+          $contact->phone = $request['phone'];
+          $contact->address = $request['address'];
+
+          if($contact->save()){
+            return redirect()->back();
+          }
+
+      }else {
+          return redirect()->route('home');
+      }
 
     }
     public function deleteContact($contact_id){
@@ -36,8 +54,10 @@ class ContactController extends Controller
       if (Auth::user()->id != $contact->user_id) {//Verifies if correct user is deleting post
           return redirect()->back();
       }
-      $post->delete();
-      return redirect()->route('phonebook')->with(['message' => 'Successfully deleted contact']);
 
+      if($contact->delete()){
+        return redirect()->route('phonebook')->with(['message' => 'Successfully deleted contact']);
+      }
     }
+
 }
