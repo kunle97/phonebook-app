@@ -130,7 +130,26 @@
         </div>
       </div>
 
-
+      <!-- Delete Check Modal -->
+      <div class="modal fade" id="deleteContactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Delete Contact?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+             <center>Are you sure you want to delete this contact?</center>
+            </div>
+            <div class="modal-footer" style="display:flex;" >
+              <button type="button" style="flex:1; margin-right: 10px;" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <a id="delete-contact-link" style="flex:1" ><button style="width:100%;" type="button"  class="btn btn-danger">Delete</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
     </div>
@@ -147,6 +166,12 @@
         $("#edit-phone").val($(this).attr("data-phone"));
         $("#edit-email").val($(this).attr("data-email"));
         $("#edit-address").val($(this).attr("data-address"));
+      });
+      
+      $("#delete-contact-button").click(function(e){
+        e.preventDefault();
+        $("#delete-contact-link").attr("href", $(this).attr('href'));
+        $("#deleteContactModal").modal('show');
       });
     </script>
   </body>
